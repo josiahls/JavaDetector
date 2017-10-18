@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * @author Josiah Laivins
@@ -9,6 +10,66 @@ public class Driver {
 
     public static void main(String[] args) {
 
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the title:");
+        String title = scanner.next();
+
+        System.out.println("Enter the width and height of the window");
+        int width = scanner.nextInt();
+        int height = scanner.nextInt();
+
+        Detector detector = new Detector(title, width, height);
+
+        int shape;
+        String choice = "";
+        do {
+
+            System.out.println("Enter the number for the shape you want");
+            shape = scanner.nextInt();
+
+            System.out.println("Enter the location x");
+            int locx = scanner.nextInt();
+            System.out.println("Enter the location y");
+            int locy = scanner.nextInt();
+            System.out.println("Enter the width");
+            width = scanner.nextInt();
+            System.out.println("Enter the height");
+            height = scanner.nextInt();
+
+            detector.addShape(shape, locx, locy, width, height);
+
+            System.out.println("Do you want to add a point to the window?");
+            choice = scanner.next();
+
+            if (choice.toLowerCase().charAt(0) == 'y') {
+                System.out.println("Enter the location x");
+                int pointx = scanner.nextInt();
+                System.out.println("Enter the location y");
+                int pointy = scanner.nextInt();
+                detector.addPoint(pointx, pointy);
+
+                System.out.println("is the point in the shape?");
+                System.out.println(detector.isPointInShapes(pointx, pointy)); // Im being lazy
+                // They need to do this manually
+                // Except for triangles
+                // That thats hard. They can ignore it, or use isPointInShapes for that
+            }
+
+
+            System.out.println("Do you want to exit?");
+            choice = scanner.next();
+
+            detector.removeAllShapes();
+
+        } while (choice.toLowerCase().charAt(0) == 'n');
+
+        detector.removeAllShapes();
+
+        System.out.println("Goodbye :)");
+
+
+
+/*
         Detector detector =
                 new Detector("Hello World", 500, 500);
 
@@ -46,6 +107,6 @@ public class Driver {
         }
 
 
-
+*/
     }
 }

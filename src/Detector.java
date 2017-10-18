@@ -7,7 +7,7 @@ import java.awt.*;
  * @version 1.0 10/17/2017
  *
  *
- * 
+ *
  */
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class Detector {
@@ -56,11 +56,13 @@ public class Detector {
         System.out.println("Loading finished...");
 
         shapePanel.addUserShape(new UserShape(name, frame.getY(), frame.getX(), locY, locX, radius));
+        frame.repaint();
     }
 
     protected boolean isPointInShapes(int x, int y) {
 
         addShape(CIRCLE, x,y, 10);
+        frame.repaint();
 
         return shapePanel.getUserShapes().get(0).isPointInShape(x,y);
     }
@@ -68,11 +70,14 @@ public class Detector {
     public void addPoint(int x, int y) {
 
         addShape(CIRCLE, x,y, 10);
+        frame.repaint();
+
     }
 
     public void addPoint(int x, int y, int radius) {
 
         addShape(CIRCLE, x,y, radius);
+        frame.repaint();
     }
 
     public void removeAllShapes() {
@@ -82,6 +87,7 @@ public class Detector {
             e.printStackTrace();
         }
         shapePanel.removeAllShapes();
+        frame.repaint();
     }
 
     public void removeAllShapes(double secondsDelay) {
@@ -92,6 +98,7 @@ public class Detector {
         }
 
         shapePanel.removeAllShapes();
+        frame.repaint();
 
     }
 }
