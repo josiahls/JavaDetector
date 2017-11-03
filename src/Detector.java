@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * @author Josiah Laivins
@@ -59,7 +60,7 @@ public class Detector {
         frame.repaint();
     }
 
-    protected boolean isPointInShapes(int x, int y) {
+    public boolean isPointInShapes(int x, int y) {
 
         addShape(CIRCLE, x,y, 10);
         frame.repaint();
@@ -99,6 +100,92 @@ public class Detector {
 
         shapePanel.removeAllShapes();
         frame.repaint();
+
+    }
+
+    public void moveLeft(int numberOfPixels, Integer increment) {
+        if (increment == null) {
+            increment = 1;
+        }
+
+        for (int n = 0; n < numberOfPixels; n += increment) {
+            System.out.println("Moving Left: " + n);
+            ArrayList<UserShape> userShapes = new ArrayList<>();
+            for (UserShape userShape : shapePanel.getUserShapes()) {
+                userShape.setLocX(userShape.getLocX() - increment);
+                userShapes.add(new UserShape(userShape.getName(), frame.getHeight(), frame.getWidth(),
+                        userShape.getLocY(), userShape.getLocX(), userShape.getWidth(), userShape.getHeight()));
+            }
+            removeAllShapes(0.1);
+            for (UserShape userShape : userShapes) {
+                shapePanel.addUserShape(userShape);
+            }
+            frame.repaint();
+        }
+    }
+
+    public void moveRight(int numberOfPixels, Integer increment) {
+        if (increment == null) {
+            increment = 1;
+        }
+
+        for (int n = 0; n < numberOfPixels; n += increment) {
+            System.out.println("Moving Left: " + n);
+            ArrayList<UserShape> userShapes = new ArrayList<>();
+            for (UserShape userShape : shapePanel.getUserShapes()) {
+                userShape.setLocX(userShape.getLocX() + increment);
+                userShapes.add(new UserShape(userShape.getName(), frame.getHeight(), frame.getWidth(),
+                        userShape.getLocY(), userShape.getLocX(), userShape.getWidth(), userShape.getHeight()));
+            }
+            removeAllShapes(0.1);
+            for (UserShape userShape : userShapes) {
+                shapePanel.addUserShape(userShape);
+            }
+            frame.repaint();
+        }
+    }
+
+    public void moveDown(int numberOfPixels, Integer increment) {
+        if (increment == null) {
+            increment = 1;
+        }
+
+        for (int n = 0; n < numberOfPixels; n += increment) {
+            System.out.println("Moving Down: " + n);
+            ArrayList<UserShape> userShapes = new ArrayList<>();
+            for (UserShape userShape : shapePanel.getUserShapes()) {
+                System.out.println("Moving Right:locY" + userShape.getLocY());
+                userShape.setLocY(userShape.getLocY() + increment);
+                userShapes.add(new UserShape(userShape.getName(), frame.getHeight(), frame.getWidth(),
+                        userShape.getLocY(), userShape.getLocX(), userShape.getWidth(), userShape.getHeight()));
+            }
+            removeAllShapes(0.1);
+            for (UserShape userShape : userShapes) {
+                shapePanel.addUserShape(userShape);
+            }
+            frame.repaint();
+        }
+    }
+    public void moveUp(int numberOfPixels, Integer increment) {
+        if (increment == null) {
+            increment = 1;
+        }
+
+        for (int n = 0; n < numberOfPixels; n += increment) {
+            System.out.println("Moving Down: " + n);
+            ArrayList<UserShape> userShapes = new ArrayList<>();
+            for (UserShape userShape : shapePanel.getUserShapes()) {
+                System.out.println("Moving Right:locY" + userShape.getLocY());
+                userShape.setLocY(userShape.getLocY() - increment);
+                userShapes.add(new UserShape(userShape.getName(), frame.getHeight(), frame.getWidth(),
+                        userShape.getLocY(), userShape.getLocX(), userShape.getWidth(), userShape.getHeight()));
+            }
+            removeAllShapes(0.1);
+            for (UserShape userShape : userShapes) {
+                shapePanel.addUserShape(userShape);
+            }
+            frame.repaint();
+        }
 
     }
 }

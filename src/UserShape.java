@@ -165,6 +165,22 @@ public class UserShape {
         return pointsX;
     }
 
+    public void setLocY(int locY) {
+        this.locY = locY;
+    }
+
+    public void setLocX(int locX) {
+        this.locX = locX;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
     protected void setPointsX(int[] pointsX) {
         this.pointsX = pointsX;
     }

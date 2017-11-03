@@ -10,6 +10,32 @@ public class Driver {
 
     public static void main(String[] args) {
 
+        Detector detector =
+                new Detector("Hello World", 500, 500);
+
+        Random rand = new Random();
+
+        // User can specify TRIANGLE, SQUARE, RECTANGLE, and CIRCLE
+        detector.addShape(Detector.TRIANGLE, 200, 200,
+                100, 100);
+
+        System.out.println("removing all shapes");
+        /*
+        for (int i = 0; i < 300; i++) {
+
+            detector.removeAllShapes(0.1);
+            detector.addShape(Detector.TRIANGLE, 200, i,
+                    100, 100);
+        }*/
+        detector.moveDown(100, 5);
+
+        detector.moveLeft(100, 5);
+
+        detector.moveUp(100, 5);
+
+        detector.moveRight(100, 5);
+
+        /*
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the title:");
         String title = scanner.next();
@@ -69,7 +95,7 @@ public class Driver {
 
 
 
-/*
+
         Detector detector =
                 new Detector("Hello World", 500, 500);
 
