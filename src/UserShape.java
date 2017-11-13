@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * @author Josiah Laivins
  *
@@ -6,6 +8,8 @@
  */
 public class UserShape {
 
+    private int id;
+    private static int globalID;
     private int name;
     private int locY;
     private int locX;
@@ -14,21 +18,28 @@ public class UserShape {
     private int radius;
     private int[] pointsX;
     private int[] pointsY;
+    private int panelSizeY;
+    private int panelSizeX;
 
-    @SuppressWarnings("unused")
-    UserShape(int name, int panelSizeY, int panelSizeX, int locY, int locX, int radius) {
+    UserShape(int name, int panelSizeY, int panelSizeX, int locY, int locX, int width, int height,  int id) {
+        this.id = id;
         this.name = name;
-        this.width = radius * 2;
-        this.height = radius * 2;
-        this.radius = radius;
         this.locY = locY;
         this.locX = locX;
+        this.width = width;
+        this.height = height;
+        this.radius = width < height ? width/2:height/2;
+        this.panelSizeY = panelSizeY;
+        this.panelSizeX = panelSizeX;
+
+        setTrianglePoints();
 
         System.out.println("Adding Centroid: X:" + getLocX() + " Y:" + getLocY() +
-                " width: " + getWidth() + " height: " + getHeight());
+                " width: " + getWidth() + " height: " + getHeight() + " PanelWidthY: " + panelSizeY + " PanelHeightX: " + panelSizeX);
     }
 
-    UserShape(int name, int panelSizeY, int panelSizeX, int locY, int locX, int width, int height) {
+    UserShape(int name, int locY, int locX, int width, int height) {
+        id = globalID++;
         this.name = name;
         this.locY = locY;
         this.locX = locX;
@@ -36,6 +47,65 @@ public class UserShape {
         this.height = height;
         this.radius = width < height ? width/2:height/2;
 
+        setTrianglePoints();
+
+        System.out.println("Adding Centroid: X:" + getLocX() + " Y:" + getLocY() +
+                " width: " + getWidth() + " height: " + getHeight() + " PanelWidthY: " + panelSizeY + " PanelHeightX: " + panelSizeX);
+    }
+
+    @SuppressWarnings("unused")
+    UserShape(int name, int locY, int locX, int radius) {
+        id = globalID++;
+        this.name = name;
+        this.width = radius * 2;
+        this.height = radius * 2;
+        this.radius = radius;
+        this.locY = locY;
+        this.locX = locX;
+
+        setTrianglePoints();
+
+        System.out.println("Adding Centroid: X:" + getLocX() + " Y:" + getLocY() +
+                " width: " + getWidth() + " height: " + getHeight());
+    }
+
+
+    @SuppressWarnings("unused")
+    UserShape(int name, int panelSizeY, int panelSizeX, int locY, int locX, int radius) {
+        id = globalID++;
+        this.name = name;
+        this.width = radius * 2;
+        this.height = radius * 2;
+        this.radius = radius;
+        this.locY = locY;
+        this.locX = locX;
+        this.panelSizeY = panelSizeY;
+        this.panelSizeX = panelSizeX;
+
+        setTrianglePoints();
+
+        System.out.println("Adding Centroid: X:" + getLocX() + " Y:" + getLocY() +
+                " width: " + getWidth() + " height: " + getHeight());
+    }
+
+    UserShape(int name, int panelSizeY, int panelSizeX, int locY, int locX, int width, int height) {
+        id = globalID++;
+        this.name = name;
+        this.locY = locY;
+        this.locX = locX;
+        this.width = width;
+        this.height = height;
+        this.radius = width < height ? width/2:height/2;
+        this.panelSizeY = panelSizeY;
+        this.panelSizeX = panelSizeX;
+
+        setTrianglePoints();
+
+        System.out.println("Adding Centroid: X:" + getLocX() + " Y:" + getLocY() +
+                " width: " + getWidth() + " height: " + getHeight() + " PanelWidthY: " + panelSizeY + " PanelHeightX: " + panelSizeX);
+    }
+
+    public void setTrianglePoints() {
         if (this.name == Detector.TRIANGLE) {
             int[] x = new int[3];
             int[] y = new int[3];
@@ -77,6 +147,31 @@ public class UserShape {
                 System.out.println();
             }
         }
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getPanelSizeY() {
+        return panelSizeY;
+    }
+
+    public void setPanelSizeY(int panelSizeY) {
+        this.panelSizeY = panelSizeY;
+
+        System.out.println("Adding Centroid: X:" + getLocX() + " Y:" + getLocY() +
+                " width: " + getWidth() + " height: " + getHeight() + " PanelWidthY: " + panelSizeY + " PanelHeightX: " + panelSizeX);
+    }
+
+    public int getPanelSizeX() {
+        return panelSizeX;
+
+    }
+
+    public void setPanelSizeX(int panelSizeX) {
+        this.panelSizeX = panelSizeX;
+        setTrianglePoints();
 
         System.out.println("Adding Centroid: X:" + getLocX() + " Y:" + getLocY() +
                 " width: " + getWidth() + " height: " + getHeight() + " PanelWidthY: " + panelSizeY + " PanelHeightX: " + panelSizeX);
@@ -135,6 +230,47 @@ public class UserShape {
         }
 
         return false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        System.out.println("here1");
+        if (o == null || getClass() != o.getClass()) return false;
+
+
+        UserShape userShape = (UserShape) o;
+
+
+        return this.id == userShape.getId();
+    }
+
+    @Override
+    public String toString() {
+        return "UserShape{" +
+                "id=" + id +
+                ", name=" + name +
+                ", locY=" + locY +
+                ", locX=" + locX +
+                ", width=" + width +
+                ", height=" + height +
+                ", radius=" + radius +
+                ", pointsX=" + Arrays.toString(pointsX) +
+                ", pointsY=" + Arrays.toString(pointsY) +
+                '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name;
+        result = 31 * result + locY;
+        result = 31 * result + locX;
+        result = 31 * result + width;
+        result = 31 * result + height;
+        result = 31 * result + radius;
+        result = 31 * result + Arrays.hashCode(pointsX);
+        result = 31 * result + Arrays.hashCode(pointsY);
+        return result;
     }
 
     protected void setName(int name) {

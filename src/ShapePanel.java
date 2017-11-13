@@ -14,6 +14,7 @@ public class ShapePanel extends JPanel {
 
     private JFrame context;
     private ArrayList<UserShape> userShapes;
+    private boolean isAdding;
 
     ShapePanel(JFrame context) {
         this.context = context;

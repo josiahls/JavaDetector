@@ -16,8 +16,28 @@ public class Driver {
         Random rand = new Random();
 
         // User can specify TRIANGLE, SQUARE, RECTANGLE, and CIRCLE
-        detector.addShape(Detector.TRIANGLE, 200, 200,
-                100, 100);
+        //UserShape triangle = new UserShape(Detector.TRIANGLE, 200, 200, 100, 100);
+        UserShape[] asteroids = new UserShape[10];
+        for (int i = 0; i < 10; i++) {
+            asteroids[i] = new UserShape(Detector.CIRCLE, 500 - (rand.nextInt(500)),
+                    i * 50, 100, 100);
+        }
+        UserShape spaceShip = new UserShape(Detector.TRIANGLE, 200, 200, 100, 100);
+
+
+
+        //detector.addShape(Detector.TRIANGLE, 200, 200,100, 100);
+        //detector.addShape(triangle);
+        for (UserShape asteroid : asteroids) {
+            detector.addShape(asteroid);
+        }
+        detector.addShape(spaceShip);
+
+
+
+        //detector.addShape(Detector.CIRCLE, 200, 200,100);
+
+        //detector.addShape(circle);
 
         System.out.println("removing all shapes");
         /*
@@ -27,15 +47,32 @@ public class Driver {
             detector.addShape(Detector.TRIANGLE, 200, i,
                     100, 100);
         }*/
-        detector.moveDown(100, 5);
+        //detector.moveDown(100, 5, spaceShip);
 
-        detector.moveLeft(100, 5);
+        //detector.moveLeft(100, 5, spaceShip);
 
-        detector.moveUp(100, 5);
+        //detector.moveUp(100, 5, spaceShip);
 
-        detector.moveRight(100, 5);
+        //detector.moveRight(100, 5, spaceShip);
 
-        /*
+        int[][] array = new int[100][100];
+
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                array[i][j] = 100 * 2 + i;
+            }
+        }
+
+        for (int i = 30; i < array.length; i++) {
+            detector.move(250, i*8, spaceShip);
+            for (int k = 0; k < asteroids.length; k++) {
+                detector.moveRight(5, rand.nextInt(20)+5, asteroids[k]);
+            }
+
+        }
+
+/*
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the title:");
         String title = scanner.next();
