@@ -3,7 +3,7 @@ import java.util.Arrays;
 /**
  * @author Josiah Laivins
  *
- * @version 1.0 10/17/2017
+ * @version 1.1 11/20/2017
  *
  */
 public class UserShape {
@@ -319,11 +319,11 @@ public class UserShape {
         return name;
     }
 
-    int getLocY() {
+    protected int getLocY() {
         return locY;
     }
 
-    int getLocX() {
+    protected int getLocX() {
         return locX;
     }
 
@@ -339,11 +339,11 @@ public class UserShape {
         return pointsX;
     }
 
-    public void setLocY(int locY) {
+    protected void setLocY(int locY) {
         this.locY = locY;
     }
 
-    public void setLocX(int locX) {
+    protected void setLocX(int locX) {
         this.locX = locX;
     }
 

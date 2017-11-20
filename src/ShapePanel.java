@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * @author Josiah Laivins
  *
- * @version 1.0 10/9/2017
+ * @version 1.1 11/20/2017
  *
  */
 public class ShapePanel extends JPanel {
