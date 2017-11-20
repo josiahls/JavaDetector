@@ -55,7 +55,6 @@ public class Detector {
         while (shapePanel == null) {
             System.out.println("Waiting for UI to build...");
         }
-
         System.out.println("Frame width / height:" + frame.getHeight() + " " + frame.getWidth());
         userShape.setPanelSizeX(frame.getWidth());
         userShape.setPanelSizeY(frame.getHeight());
@@ -71,18 +70,53 @@ public class Detector {
             System.out.println("Waiting for UI to build...");
         }
 
-        System.out.println("Frame width / height:" + frame.getHeight() + " " + frame.getWidth());
+        //System.out.println("Frame width / height:" + frame.getHeight() + " " + frame.getWidth());
         UserShape userShape = new UserShape(name, frame.getHeight(), frame.getWidth(), locY, locX, radius);
         shapePanel.addUserShape(userShape);
         frame.repaint();
     }
 
-    public boolean isPointInShapes(int x, int y) {
+    public boolean isPointInShapes(int x, int y, UserShape point) {
 
-        addShape(CIRCLE, x,y, 10);
-        frame.repaint();
+        for (UserShape userShape : shapePanel.getUserShapes()) {
+            System.out.println("Checking isPoint");
+            if (userShape.isPointInShape(x,y) && !point.equals(userShape)) {
+                System.out.println("Returning true");
+                return true;
+            } else {
+                System.out.println("Returning false");
+            }
+        }
+        return false;
+    }
 
-        return shapePanel.getUserShapes().get(0).isPointInShape(x,y);
+    public int getLocationY(UserShape userShape) {
+        for (UserShape shape : shapePanel.getUserShapes()) {
+            if (shape.equals(userShape)) {
+                return shape.getLocY();
+            }
+        }
+        return -1;
+    }
+    public int getLocationX(UserShape userShape) {
+        for (UserShape shape : shapePanel.getUserShapes()) {
+            if (shape.equals(userShape)) {
+                return shape.getLocX();
+            }
+        }
+        return -1;
+    }
+
+    public boolean isShapeInShapes(UserShape userShape) {
+        boolean isInShape = false;
+
+        for (UserShape shape : shapePanel.getUserShapes()) {
+            if (!shape.equals(userShape)) {
+
+            }
+        }
+
+        return false;//shapePanel.getUserShapes().get(0).isPointInShape(x,y);
     }
 
     public void addPoint(int x, int y) {
@@ -120,13 +154,28 @@ public class Detector {
 
     }
 
+
+    public void removeShape(UserShape userShape) {
+        int index = 0;
+        for (UserShape shape : shapePanel.getUserShapes()) {
+            if (shape.equals(userShape)) {
+                shapePanel.userShapes.remove(index);
+                break;
+            }
+            index++;
+        }
+
+        frame.repaint();
+
+    }
+
     public void moveLeft(int numberOfPixels, Integer increment) {
         if (increment == null) {
             increment = 1;
         }
 
         for (int n = 0; n < numberOfPixels; n += increment) {
-            System.out.println("Moving Left: " + n);
+            //System.out.println("Moving Left: " + n);
             ArrayList<UserShape> userShapes = new ArrayList<>();
             for (UserShape userShape : shapePanel.getUserShapes()) {
                 userShape.setLocX(userShape.getLocX() - increment);
@@ -149,7 +198,7 @@ public class Detector {
         }
 
         for (int n = 0; n < numberOfPixels; n += increment) {
-            System.out.println("Moving Left: " + n);
+            //System.out.println("Moving Left: " + n);
             ArrayList<UserShape> userShapes = new ArrayList<>();
             for (UserShape userShape : shapePanel.getUserShapes()) {
                 userShape.setLocX(userShape.getLocX() + increment);
@@ -171,10 +220,10 @@ public class Detector {
         }
 
         for (int n = 0; n < numberOfPixels; n += increment) {
-            System.out.println("Moving Down: " + n);
+            //System.out.println("Moving Down: " + n);
             ArrayList<UserShape> userShapes = new ArrayList<>();
             for (UserShape userShape : shapePanel.getUserShapes()) {
-                System.out.println("Moving Right:locY" + userShape.getLocY());
+                //System.out.println("Moving Right:locY" + userShape.getLocY());
                 userShape.setLocY(userShape.getLocY() + increment);
                 userShapes.add(new UserShape(userShape.getName(), frame.getHeight(), frame.getWidth(),
                         userShape.getLocY(), userShape.getLocX(), userShape.getWidth(), userShape.getHeight()
@@ -193,10 +242,10 @@ public class Detector {
         }
 
         for (int n = 0; n < numberOfPixels; n += increment) {
-            System.out.println("Moving Down: " + n);
+            //System.out.println("Moving Down: " + n);
             ArrayList<UserShape> userShapes = new ArrayList<>();
             for (UserShape userShape : shapePanel.getUserShapes()) {
-                System.out.println("Moving Right:locY" + userShape.getLocY());
+                //System.out.println("Moving Right:locY" + userShape.getLocY());
                 userShape.setLocY(userShape.getLocY() - increment);
                 userShapes.add(new UserShape(userShape.getName(), frame.getHeight(), frame.getWidth(),
                         userShape.getLocY(), userShape.getLocX(), userShape.getWidth(), userShape.getHeight()
@@ -216,7 +265,7 @@ public class Detector {
 
         ArrayList<UserShape> userShapes = new ArrayList<>();
         for (UserShape userShape : shapePanel.getUserShapes()) {
-            System.out.println("Moving ");
+            //System.out.println("Moving ");
             userShape.setLocY(y);
             userShape.setLocX(x);
             userShapes.add(new UserShape(userShape.getName(), frame.getHeight(), frame.getWidth(),
@@ -238,11 +287,11 @@ public class Detector {
         }
 
         for (int n = 0; n < numberOfPixels; n += increment) {
-            System.out.println("Moving Left: " + n);
+            //System.out.println("Moving Left: " + n);
             ArrayList<UserShape> userShapes = new ArrayList<>();
             for (UserShape userShape : shapePanel.getUserShapes()) {
                 if (userShapeParam == null || userShape.equals(userShapeParam)) {
-                    System.out.println("Found Shape!");
+                    //System.out.println("Found Shape!");
                     userShape.setLocX(userShape.getLocX() - increment);
                 }
                 userShapes.add(new UserShape(userShape.getName(), frame.getHeight(), frame.getWidth(),
@@ -263,11 +312,11 @@ public class Detector {
         }
 
         for (int n = 0; n < numberOfPixels; n += increment) {
-            System.out.println("Moving Left: " + n);
+            //System.out.println("Moving Left: " + n);
             ArrayList<UserShape> userShapes = new ArrayList<>();
             for (UserShape userShape : shapePanel.getUserShapes()) {
                 if (userShapeParam == null || userShape.equals(userShapeParam)) {
-                    System.out.println("Found Shape!");
+                    //System.out.println("Found Shape!");
                     userShape.setLocX(userShape.getLocX() + increment);
                 }
                 userShapes.add(new UserShape(userShape.getName(), frame.getHeight(), frame.getWidth(),
@@ -290,10 +339,10 @@ public class Detector {
             //System.out.println("Moving Down: " + n);
             ArrayList<UserShape> userShapes = new ArrayList<>();
             for (UserShape userShape : shapePanel.getUserShapes()) {
-                System.out.println("Shape being tested: " + userShape.toString() + " against: " + userShapeParam.toString());
+                //System.out.println("Shape being tested: " + userShape.toString() + " against: " + userShapeParam.toString());
                 if (userShapeParam == null || userShape.equals(userShapeParam)) {
-                    System.out.println("Found Shape!");
-                    System.out.println("Moving Down:locY" + userShape.getLocY());
+                    //System.out.println("Found Shape!");
+                    //System.out.println("Moving Down:locY" + userShape.getLocY());
                     userShape.setLocY(userShape.getLocY() + increment);
                 }
                 userShapes.add(new UserShape(userShape.getName(), frame.getHeight(), frame.getWidth(),
@@ -312,12 +361,12 @@ public class Detector {
         }
 
         for (int n = 0; n < numberOfPixels; n += increment) {
-            System.out.println("Moving Down: " + n);
+            //System.out.println("Moving Down: " + n);
             ArrayList<UserShape> userShapes = new ArrayList<>();
             for (UserShape userShape : shapePanel.getUserShapes()) {
                 if (userShapeParam == null || userShape.equals(userShapeParam)) {
-                    System.out.println("Found Shape!");
-                    System.out.println("Moving Down:locY" + userShape.getLocY());
+                    //System.out.println("Found Shape!");
+                    //System.out.println("Moving Down:locY" + userShape.getLocY());
                     userShape.setLocY(userShape.getLocY() - increment);
                 }
                 userShapes.add(new UserShape(userShape.getName(), frame.getHeight(), frame.getWidth(),
@@ -338,8 +387,8 @@ public class Detector {
         ArrayList<UserShape> userShapes = new ArrayList<>();
         for (UserShape userShape : shapePanel.getUserShapes()) {
             if (userShapeParam == null || userShape.equals(userShapeParam)) {
-                System.out.println("Moving ");
-                System.out.println("Found Shape!");
+                //System.out.println("Moving ");
+                //System.out.println("Found Shape!");
                 userShape.setLocY(y);
                 userShape.setLocX(x);
             }

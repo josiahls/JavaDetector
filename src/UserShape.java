@@ -32,10 +32,11 @@ public class UserShape {
         this.panelSizeY = panelSizeY;
         this.panelSizeX = panelSizeX;
 
+        setPoints();
         setTrianglePoints();
 
-        System.out.println("Adding Centroid: X:" + getLocX() + " Y:" + getLocY() +
-                " width: " + getWidth() + " height: " + getHeight() + " PanelWidthY: " + panelSizeY + " PanelHeightX: " + panelSizeX);
+        //System.out.println("Adding Centroid: X:" + getLocX() + " Y:" + getLocY() +
+        //        " width: " + getWidth() + " height: " + getHeight() + " PanelWidthY: " + panelSizeY + " PanelHeightX: " + panelSizeX);
     }
 
     UserShape(int name, int locY, int locX, int width, int height) {
@@ -47,10 +48,11 @@ public class UserShape {
         this.height = height;
         this.radius = width < height ? width/2:height/2;
 
+        setPoints();
         setTrianglePoints();
 
-        System.out.println("Adding Centroid: X:" + getLocX() + " Y:" + getLocY() +
-                " width: " + getWidth() + " height: " + getHeight() + " PanelWidthY: " + panelSizeY + " PanelHeightX: " + panelSizeX);
+        //System.out.println("Adding Centroid: X:" + getLocX() + " Y:" + getLocY() +
+        //        " width: " + getWidth() + " height: " + getHeight() + " PanelWidthY: " + panelSizeY + " PanelHeightX: " + panelSizeX);
     }
 
     @SuppressWarnings("unused")
@@ -63,10 +65,11 @@ public class UserShape {
         this.locY = locY;
         this.locX = locX;
 
+        setPoints();
         setTrianglePoints();
 
-        System.out.println("Adding Centroid: X:" + getLocX() + " Y:" + getLocY() +
-                " width: " + getWidth() + " height: " + getHeight());
+        //System.out.println("Adding Centroid: X:" + getLocX() + " Y:" + getLocY() +
+        //        " width: " + getWidth() + " height: " + getHeight());
     }
 
 
@@ -82,10 +85,11 @@ public class UserShape {
         this.panelSizeY = panelSizeY;
         this.panelSizeX = panelSizeX;
 
+        setPoints();
         setTrianglePoints();
 
-        System.out.println("Adding Centroid: X:" + getLocX() + " Y:" + getLocY() +
-                " width: " + getWidth() + " height: " + getHeight());
+        //System.out.println("Adding Centroid: X:" + getLocX() + " Y:" + getLocY() +
+        //        " width: " + getWidth() + " height: " + getHeight());
     }
 
     UserShape(int name, int panelSizeY, int panelSizeX, int locY, int locX, int width, int height) {
@@ -99,13 +103,15 @@ public class UserShape {
         this.panelSizeY = panelSizeY;
         this.panelSizeX = panelSizeX;
 
+        setPoints();
         setTrianglePoints();
 
-        System.out.println("Adding Centroid: X:" + getLocX() + " Y:" + getLocY() +
-                " width: " + getWidth() + " height: " + getHeight() + " PanelWidthY: " + panelSizeY + " PanelHeightX: " + panelSizeX);
+        //System.out.println("Adding Centroid: X:" + getLocX() + " Y:" + getLocY() +
+        //        " width: " + getWidth() + " height: " + getHeight() + " PanelWidthY: " + panelSizeY + " PanelHeightX: " + panelSizeX);
     }
 
     public void setTrianglePoints() {
+        System.out.println("PanelSizeY: " + panelSizeY + " and PanelSizeX: " + panelSizeX);
         if (this.name == Detector.TRIANGLE) {
             int[] x = new int[3];
             int[] y = new int[3];
@@ -141,12 +147,28 @@ public class UserShape {
             pointsX = x;
             pointsY = y;
 
-            System.out.println("Triangle Points: ");
+            //System.out.println("Triangle Points: ");
             for (int i = 0; i < pointsY.length; i++) {
-                System.out.print("\tX" + i + ":" +pointsX[i] + " Y" + i + ":" + pointsY[i]);
-                System.out.println();
+                //System.out.print("\tX" + i + ":" +pointsX[i] + " Y" + i + ":" + pointsY[i]);
+                //System.out.println();
             }
         }
+    }
+
+    public void setPoints() {
+        /*
+        if (this.name == Detector.SQUARE || this.name == Detector.RECTANGLE) {
+            this.pointsX = new int[4];
+            this.pointsY = new int[4];
+            this.pointsX[0] = this.locX - (int) width / 2;
+            this.pointsX[1] = this.locX + (int) width / 2;
+            this.pointsX[2] = this.locX - (int) width / 2;
+            this.pointsX[3] = this.locX + (int) width / 2;
+            this.pointsY[0] = this.locY + (int) height / 2;
+            this.pointsY[1] = this.locY + (int) height / 2;
+            this.pointsY[2] = this.locY - (int) height / 2;
+            this.pointsY[3] = this.locY - (int) height / 2;
+        }*/
     }
 
     public int getId() {
@@ -159,9 +181,10 @@ public class UserShape {
 
     public void setPanelSizeY(int panelSizeY) {
         this.panelSizeY = panelSizeY;
+        setTrianglePoints();
 
-        System.out.println("Adding Centroid: X:" + getLocX() + " Y:" + getLocY() +
-                " width: " + getWidth() + " height: " + getHeight() + " PanelWidthY: " + panelSizeY + " PanelHeightX: " + panelSizeX);
+        //System.out.println("Adding Centroid: X:" + getLocX() + " Y:" + getLocY() +
+        //        " width: " + getWidth() + " height: " + getHeight() + " PanelWidthY: " + panelSizeY + " PanelHeightX: " + panelSizeX);
     }
 
     public int getPanelSizeX() {
@@ -173,19 +196,24 @@ public class UserShape {
         this.panelSizeX = panelSizeX;
         setTrianglePoints();
 
-        System.out.println("Adding Centroid: X:" + getLocX() + " Y:" + getLocY() +
-                " width: " + getWidth() + " height: " + getHeight() + " PanelWidthY: " + panelSizeY + " PanelHeightX: " + panelSizeX);
+        //System.out.println("Adding Centroid: X:" + getLocX() + " Y:" + getLocY() +
+        //        " width: " + getWidth() + " height: " + getHeight() + " PanelWidthY: " + panelSizeY + " PanelHeightX: " + panelSizeX);
     }
 
     boolean isPointInShape(int x, int y) {
         if (getName() == Detector.CIRCLE) {
             double distanceFromCentroid = Math.sqrt(Math.pow(locX - x, 2) + Math.pow(locY - y, 2));
 
-            System.out.println("Centroid is: " + distanceFromCentroid + " radius is: " + radius);
+            //System.out.println("Centroid is: " + distanceFromCentroid + " radius is: " + radius);
             if (distanceFromCentroid < radius) {
                 return true;
             }
         } else if (getName() == Detector.TRIANGLE) {
+            //System.out.println("Testing the triangle");
+            for (int i = 0; i <3 ; i++) {
+                //System.out.println("Testing Triangle points: " + pointsX[i] + " and " + pointsY[i]);
+            }
+            //System.out.println("Against: x " + x + " y " + y);
 
             // Calculate whether a point is in a triangle using the
             // Barycentric coordinate system
@@ -213,15 +241,18 @@ public class UserShape {
 
             // If any of the alphas is less than zero then the point is not in the triangle
             if (alpha1 >= 0 && alpha2 >= 0 && alpha3 >= 0) {
+                System.out.println("In");
                 return true;
+            } else {
+                System.out.println("Not in");
             }
         } else if (getName() == Detector.SQUARE ||
                 getName() == Detector.RECTANGLE) {
 
-            System.out.println("Left X: " + (locX - width / 2));
-            System.out.println("Right X: " + (locX + width / 2));
-            System.out.println("Left Y: " + (locY - width / 2));
-            System.out.println("Right Y: " + (locY + width / 2));
+            //System.out.println("Left X: " + (locX - width / 2));
+            //System.out.println("Right X: " + (locX + width / 2));
+            //System.out.println("Left Y: " + (locY - width / 2));
+            //System.out.println("Right Y: " + (locY + width / 2));
 
             if (x > locX - width / 2 && x < locX + width / 2 &&
                     y > locY - height / 2 && y < locY + height / 2) {
@@ -235,7 +266,7 @@ public class UserShape {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        System.out.println("here1");
+        //System.out.println("here1");
         if (o == null || getClass() != o.getClass()) return false;
 
 
@@ -243,6 +274,13 @@ public class UserShape {
 
 
         return this.id == userShape.getId();
+    }
+
+    public boolean isShapeInShape(UserShape userShape) {
+        if (userShape.name == Detector.RECTANGLE || userShape.name == Detector.SQUARE) {
+
+        }
+        return false;
     }
 
     @Override

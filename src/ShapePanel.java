@@ -13,7 +13,7 @@ public class ShapePanel extends JPanel {
     private Color[] colors = new Color[]{Color.RED, Color.BLUE, Color.ORANGE, Color.YELLOW};
 
     private JFrame context;
-    private ArrayList<UserShape> userShapes;
+    public ArrayList<UserShape> userShapes;
     private boolean isAdding;
 
     ShapePanel(JFrame context) {

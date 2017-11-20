@@ -10,9 +10,81 @@ public class Driver {
 
     public static void main(String[] args) {
 
-        Detector detector =
-                new Detector("Hello World", 500, 500);
+        Detector detector = new Detector("Hello World", 500, 500);
+        Scanner scan = new Scanner(System.in);
 
+        UserShape spaceShip = new UserShape(Detector.TRIANGLE, 250, 250, 50, 50);
+        detector.addShape(spaceShip);
+
+        Random random = new Random();
+        char s = ' ';
+
+        do {
+            boolean isTouching = false;
+            UserShape point;
+            // Place the point, if it is in the ship regenerate
+            int pointY = 250;//random.nextInt(500);
+            int pointX = 250;//random.nextInt(500);
+            do {
+
+                point = new UserShape(Detector.CIRCLE,
+                        pointY, pointX, 10, 10);
+                detector.addShape(point);
+
+                isTouching = detector.isPointInShapes(pointX, pointY, point);
+
+                if (isTouching) {
+                    System.out.println("Removing shape");
+                    detector.removeShape(point);
+                    pointY = random.nextInt(500);
+                    pointX = random.nextInt(500);
+                }
+            } while (isTouching);
+
+            System.out.println(" Moving " + pointY + "  and  " + spaceShip.getLocY());
+            if (pointY < detector.getLocationY(spaceShip)) {
+                for (int i = detector.getLocationY(spaceShip); i > pointY; i--) {
+                    detector.moveUp(1, 1, spaceShip);
+                }
+            } else {
+                for (int i = detector.getLocationY(spaceShip); i < pointY; i++) {
+                    detector.moveDown(1, 1, spaceShip);
+                }
+            }
+            System.out.println(" Moving " + pointX + "  and  " + spaceShip.getLocX());
+            if (pointX < detector.getLocationX(spaceShip)) {
+                for (int i = detector.getLocationX(spaceShip); i > pointX; i--) {
+                    detector.moveLeft(1, 1, spaceShip);
+                }
+            } else {
+                for (int i = detector.getLocationX(spaceShip); i < pointX; i++) {
+                    detector.moveRight(1, 1, spaceShip);
+                }
+            }
+            System.out.println("Would you like to try the ship nav again? y/n");
+            s = scan.next().toLowerCase().charAt(0);
+            if (s == 'y') {
+                detector.removeShape(point);
+            }
+
+        }while (s != 'n');
+
+        System.out.println("Goodbye!!");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
         Random rand = new Random();
 
         // User can specify TRIANGLE, SQUARE, RECTANGLE, and CIRCLE
@@ -54,7 +126,7 @@ public class Driver {
         //detector.moveUp(100, 5, spaceShip);
 
         //detector.moveRight(100, 5, spaceShip);
-
+/*
         int[][] array = new int[100][100];
 
         for (int i = 0; i < array.length; i++) {
@@ -71,7 +143,7 @@ public class Driver {
 
         }
 
-/*
+
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the title:");
